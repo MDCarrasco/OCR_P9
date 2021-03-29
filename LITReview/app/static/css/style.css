@@ -25,8 +25,8 @@ body {
 
 .btn-custom-blue {
     color: #ffffff;
-    background-color: #0075B7;
-    border-color: #0075B7;
+    background-color: #097960;
+    border-color: #097960;
     padding: 0.375rem 1.75rem;
     border-radius: 50rem !important;
 }
@@ -37,22 +37,22 @@ body {
 
 .btn-custom-gradient {
     color: #ffffff;
-    background-image: linear-gradient(135deg, rgba(0, 117, 183, 1) 0%, rgba(49, 0, 96, 1) 100%);
+    background-image: linear-gradient(135deg, rgba(9,121,96, 1) 0%, rgba(0,255,126, 1) 100%);
     border: 0;
     padding: 0.375rem 1.75rem;
     border-radius: 50rem !important;
 }
 
 .text-custum-blue {
-    color: #0075B7;
+    color: #097960;
 }
 
 a {
-    color: #0075B7;
+    color: #097960;
 }
 
 #body_signup {
-    background: linear-gradient(90deg, #0075B7 -12.22%, rgba(49, 0, 96, 0.82) 87.78%);
+    background: linear-gradient(90deg, #097960 -12.22%, rgba(0,255,126, 0.82) 87.78%);
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -62,7 +62,7 @@ a {
 }
 
 #body_login {
-    background: linear-gradient(90deg, #0075B7 -12.22%, rgba(49, 0, 96, 0.82) 87.78%);
+    background: linear-gradient(90deg, #097960 -12.22%, rgba(0,255,126, 0.82) 87.78%);
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -72,7 +72,7 @@ a {
 }
 
 #body_index {
-    background: linear-gradient(90deg, #0075B7 -12.22%, rgba(49, 0, 96, 0.82) 87.78%);
+    background: linear-gradient(90deg, #097960 -12.22%, rgba(0,255,126, 0.82) 87.78%);
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -90,8 +90,8 @@ a {
 }
 
 .box-navside {
-    background: rgb(0, 117, 183);
-    background: linear-gradient(180deg, rgb(0, 117, 183) 0%, rgb(49, 0, 96) 100%);
+    background: rgb(9,121,96);
+    background: linear-gradient(90deg, rgba(9,121,96, 1) 0%, rgba(0,255,126, 1) 100%);
     min-width: 70px;
     display: flex;
     height: 100vh;
@@ -101,8 +101,8 @@ a {
 }
 
 .box-navbottom {
-    background: rgb(0, 117, 183);
-    background: linear-gradient(90deg, rgba(0, 117, 183, 1) 0%, rgba(49, 0, 96, 1) 100%);
+    background: rgb(9,121,96);
+    background: linear-gradient(90deg, rgba(9,121,96, 1) 0%, rgba(0,255,126, 1) 100%);
     border-top: 5px solid #fff;
     display: flex;
     justify-content: center;
@@ -115,7 +115,7 @@ a {
 }
 
 .box-navtop {
-    background: rgba(0, 117, 183, 1);
+    background: rgba(9,121,96, 1);
     display: flex;
     height: 70px;
     position: fixed;
@@ -226,22 +226,24 @@ a {
     position: relative;
     background-color: #CDCDCD;
     -webkit-background-image: linear-gradient(180deg,
-    rgba(0, 117, 183, 1) 10%,
-    rgba(0, 117, 183, 0.88) 30%,
-    rgba(49, 0, 96, 0.88) 80%,
-    rgba(49, 0, 96, 1) 100%),
+    rgba(9,121,96, 1) 10%,
+    rgba(9,121,96, 0.88) 30%,
+    rgba(0,255,126, 0.88) 80%,
+    rgba(0,255,126, 1) 100%),
+
     url('/static/img/ville_puteaux.jpeg');
     -moz-background-image: linear-gradient(180deg,
-    rgba(0, 117, 183, 1) 10%,
-    rgba(0, 117, 183, 0.88) 30%,
-    rgba(49, 0, 96, 0.88) 80%,
-    rgba(49, 0, 96, 1) 100%),
+    rgba(9,121,96, 1) 10%,
+    rgba(9,121,96, 0.88) 30%,
+    rgba(0,255,126, 0.88) 80%,
+    rgba(0,255,126, 1) 100%),
+
     url('/static/img/ville_puteaux.jpeg');
     background-image: linear-gradient(180deg,
-    rgba(0, 117, 183, 1) 10%,
-    rgba(0, 117, 183, 0.88) 30%,
-    rgba(49, 0, 96, 0.88) 80%,
-    rgba(49, 0, 96, 1) 100%),
+    rgba(9,121,96, 1) 10%,
+    rgba(9,121,96, 0.88) 30%,
+    rgba(0,255,126, 0.88) 80%,
+    rgba(0,255,126, 1) 100%),
     url('/static/img/ville_puteaux.jpeg');
     color: #ffffff;
     text-align: center;
@@ -308,10 +310,10 @@ a {
 
 .bg-gradient {
     background-image: linear-gradient(180deg,
-    rgba(0, 117, 183, 1) 10%,
-    rgba(0, 117, 183, 0.88) 30%,
-    rgba(49, 0, 96, 0.88) 80%,
-    rgba(49, 0, 96, 1) 100%),
+    rgba(9,121,96, 1) 10%,
+    rgba(9,121,96, 0.88) 30%,
+    rgba(0,255,126, 0.88) 80%,
+    rgba(0,255,126, 1) 100%),
     url('/static/img/ville_puteaux3.jpg');
     background-attachment: fixed;
     background-repeat: no-repeat;
