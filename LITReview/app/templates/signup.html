@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+
+{% block title %}Inscription - {% endblock %}
+
+
+{% block id_css_body %}body_signup{% endblock %}
+
+
+{% block statut_membre %}
+    <div class="statut-membre-accounts">
+        <p>Déjà membre ? <a href="{% url 'login' %}">Je me connecte</a></p>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+
+    {# si request.user.is_authenticated #}
+
+    <h1 class="titre-accounts">Créer mon compte</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {#{% bootstrap_form form %}#}
+        {% bootstrap_field form.username show_help=False placeholder="" form_group_class='form-group mb-0'%}
+        <small>C'est le nom sous lequel vous apparaitrez.</small>
+        {% bootstrap_field form.email show_help=False placeholder="" form_group_class='form-group mt-5' %}
+        {% bootstrap_field form.password1 show_help=False placeholder="" %}
+        {% bootstrap_field form.password2 show_help=False placeholder="" %}
+        <input type="submit" class="btn btn-dark bouton-accounts" value="S'inscrire">
+    </form>
+
+{% endblock content %}

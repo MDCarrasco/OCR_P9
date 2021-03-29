@@ -1,0 +1,112 @@
+{% load static %}
+
+{# Variables par défaut #}
+{% static "img/user.svg" as icone_login_profil_gestion %}
+{% url 'accounts:signup' as nom_url %}
+{% if request.path == '/' %}
+    {# SI la page = accueil alors afficher la navtop #}
+    {# ************************** navtop sur accueuil (pc et mobile) **************************  #}
+
+    <div class="box-navtop">
+
+        <nav class="nav navtop container">
+
+            <div class="navtop-block">
+                <a class="nav-link active" href="{% url 'index' %}" data-toggle="tooltip" data-placement="right"
+                   title="Accueil">
+                    <img src="{% static 'img/home.svg' %}" alt="" class="icone-navbar">
+                </a>
+            </div>
+            <div class="navtop-block">
+                <a class="nav-link" href="{% url 'index' %}" data-toggle="tooltip" data-placement="right"
+                   title="Idéation">
+                    <div>
+                        <img src="{% static 'img/bulb.svg' %}" alt="" class="icone-navbar">
+                        <div class="nav-titre">{{ nav_titre_ideation }}</div>
+                    </div>
+                </a>
+                <a class="nav-link" href="{% url 'index' %}" data-toggle="tooltip" data-placement="right"
+                   title="Projets">
+                    <div>
+                        <img src="{% get_static_prefix %}images/thumbnails.svg" alt="" class="icone-navbar">
+                        <div class="nav-titre">{{ nav_titre_projet }}</div>
+                    </div>
+                </a>
+                <a class="nav-link" href="{% url 'index' %}" data-toggle="tooltip" data-placement="right" title="Carte">
+                    <div>
+                        <img src="{% static 'img/pin.svg' %}" alt="" class="icone-navbar">
+                        <div class="nav-titre">{{ nav_titre_carte }}</div>
+                    </div>
+                </a>
+            </div>
+            <div class="navtop-block">
+                <a class="nav-link" href="{{ nom_url }}" data-toggle="tooltip" data-placement="right"
+                   title="">
+                    <img src="{{ icone_login_profil_gestion }}" alt="" class="icone-navbar">
+                </a>
+            </div>
+        </nav>
+    </div>
+
+{% else %}
+
+    {# SINON afficher sur le coté sur grands/moyens écrans et en bas sur mobile #}
+
+    {# ************************** navside sur grand/moyen écrans ************************** #}
+
+    <div class="box-navside d-none d-sm-flex">
+
+        <nav class="nav navside">
+            <div>
+                <a class="nav-link" href="{% url 'index' %}" data-toggle="tooltip" data-placement="right"
+                   title="Accueil">
+                    <img src="{% static 'img/home.svg' %}" alt="" class="icone-navbar">
+                </a>
+            </div>
+            <div>
+                <a class="nav-link" href="{% url 'index' %}" data-toggle="tooltip" data-placement="right"
+                   title="Idéation">
+                    <img src="{% static 'img/bulb.svg' %}" alt="" class="icone-navbar">
+                </a>
+                <a class="nav-link" href="{% url 'index' %}" data-toggle="tooltip" data-placement="right"
+                   title="Projets">
+                    <img src="{% static 'img/thumbnails.svg' %}" alt="" class="icone-navbar">
+                </a>
+                <a class="nav-link" href="{% url 'index' %}" data-toggle="tooltip" data-placement="right" title="Carte">
+                    <img src="{% static 'img/pin.svg' %}" alt="" class="icone-navbar">
+                </a>
+            </div>
+            <div>
+                <a class="nav-link" href="{{ nom_url }}" data-toggle="tooltip" data-placement="right"
+                   title="">
+                    <img src="{{ icone_login_profil_gestion }}" alt="" class="icone-navbar">
+                </a>
+            </div>
+        </nav>
+
+    </div>
+
+    {# ************************** navbottom sur petits écrans ************************** #}
+
+    <div class="box-navbottom d-sm-none ">
+
+        <nav class="nav navbottom">
+            <a class="nav-link" href="{% url 'index' %}">
+                <img src="{% static 'img/home.svg' %}" alt="" class="icone-navbar">
+            </a>
+            <a class="nav-link" href="{% url 'index' %}">
+                <img src="{% static 'img/bulb.svg' %}" alt="" class="icone-navbar">
+            </a>
+            <a class="nav-link" href="{% url 'index' %}">
+                <img src="{% static 'img/thumbnails.svg' %}" alt="" class="icone-navbar">
+            </a>
+            <a class="nav-link" href="{% url 'index' %}">
+                <img src="{% static 'img/pin.svg' %}" alt="" class="icone-navbar">
+            </a>
+            <a class="nav-link" href="{{ nom_url }}">
+                <img src="{{ icone_login_profil_gestion }}" alt="" class="icone-navbar">
+            </a>
+        </nav>
+    </div>
+
+{% endif %}

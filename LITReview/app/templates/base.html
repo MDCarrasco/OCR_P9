@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load bootstrap4 %}
+{% load static %}
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}LITReview</title>
+        {# Load CSS and JavaScript #}
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+
+    </head>
+    <body id="{% block id_css_body %}{% endblock %}">
+
+        {% block redirection %}
+
+        {% endblock %}
+
+
+        {% block logo_admin %}
+
+        {% endblock %}
+
+
+        <div class="parent-form">
+            <div class="enfant-form shadow-lg">
+                <div class="contenu-accounts">
+
+                    {% block statut_membre %}
+                    {% endblock %}
+
+                    {% block content %}
+                    {% endblock content %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
