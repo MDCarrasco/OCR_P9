@@ -1,0 +1,53 @@
+{% extends 'base_index.html' %}
+{% load static %}
+
+{% block title %}
+    Accueil {{ block.super }}
+{% endblock title %}
+
+{% block content %}
+
+    <div id="block-content-home">
+
+        <!-- ************************** HEADER ************************** -->
+        <header>
+            {# NAVBAR MAIN TOP #}
+            {% block navbar %}
+                {% include "navbar.html" %}
+            {% endblock navbar %}
+
+            {# IMAGE HEADER #}
+            <div class="header-home">
+                <div class="container contenu-header-home">
+                    <p>
+                        <img src="{% static 'images/LITReview_logo.png' %}" alt="" class="logo">
+                    </p>
+                </div>
+            </div>
+        </header>
+        <div id="content-def-bp">
+        </div>
+
+        <footer id="footer" class="mt-5 py-5 bg-dark">
+            <div class="container">
+
+                <div class="logo-footer mb-3">
+                </div>
+
+                <div class="menu-footer d-flex flex-column flex-md-row">
+                    <a href="{% url 'index' %}">Accueil</a>
+                    <a href="LITReview@adresseimpossiblequinexistepas.com">Contact</a>
+
+                </div>
+
+                <div class="text-center text-muted mt-4">
+                    <span>
+                        © Copyright 2021 -
+                        <a href="https://github.com/MDCarrasco/OCR_P9" target="_blank" class="text-muted">Michael Carrasco</a>
+                        - Tous droits réservés -
+                    </span>
+                </div>
+            </div>
+        </footer>
+    </div>
+{% endblock content %}
