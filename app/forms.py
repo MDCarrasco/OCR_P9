@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django import forms
 
+
 class UserCreateForm(UserCreationForm):
     class Meta:
         fields = ('username', 'email', 'password1', 'password2')
@@ -18,6 +19,7 @@ class UserCreateForm(UserCreationForm):
             raise forms.ValidationError("Cet e-mail est déjà utilisé par un autre utilisateur.")
         return self.cleaned_data['email']
     '''
+
 
 class UserLoginForm(AuthenticationForm):
     class Meta:

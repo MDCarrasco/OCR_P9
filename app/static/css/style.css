@@ -6,7 +6,7 @@
 
 @font-face {
     font-family: "Dax Bold";
-    src: url("/static/font/Dax-Bold.otf");
+    src: url("../fonts/Dax-Bold.otf");
 }
 
 body {
@@ -43,7 +43,7 @@ body {
     border-radius: 50rem !important;
 }
 
-.text-custum-blue {
+.text-custom-blue {
     color: #097960;
 }
 
@@ -80,7 +80,7 @@ a {
     height: 100vh;
 }
 
-.box-principale {
+.main-box {
     /*   background-color: cyan; */
     display: flex;
     position: relative;
@@ -89,18 +89,7 @@ a {
     /*   grid-template-columns: 70px 1fr; */
 }
 
-.box-navside {
-    background: rgb(9,121,96);
-    background: linear-gradient(90deg, rgba(9,121,96, 1) 0%, rgba(0,255,126, 1) 100%);
-    min-width: 70px;
-    display: flex;
-    height: 100vh;
-    position: sticky;
-    top: 0;
-    left: 0;
-}
-
-.box-navbottom {
+.navbottom-box {
     background: rgb(9,121,96);
     background: linear-gradient(90deg, rgba(9,121,96, 1) 0%, rgba(0,255,126, 1) 100%);
     border-top: 5px solid #fff;
@@ -114,7 +103,7 @@ a {
     z-index: 9999;
 }
 
-.box-navtop {
+.navtop-box {
     background: rgba(9,121,96, 1);
     display: flex;
     height: 70px;
@@ -126,19 +115,28 @@ a {
     z-index: 9999;
 }
 
-.box-contenu {
+.box-content {
     /*   background-color: green; */
     flex-grow: 1;
 }
 
-/************************** NAVBAR ICONES **************************/
+/************************** NAVBAR BRAND **************************/
 
-.icone-navbar {
+.navbar-brand {
+    position: absolute;
+    left: 50%;
+    margin-left: -60px !important;  /* 50% of your logo width */
+    display: block;
+}
+
+/************************** NAVBAR ICONS **************************/
+
+.navbar-icon {
     width: 25px;
     color: #2FD485;
 }
 
-/************************** NAVBAR TOP : HOME (top sur tous types d'écran) **************************/
+/************************** NAVBAR TOP : HOME **************************/
 
 .navtop {
     justify-content: space-between;
@@ -166,35 +164,7 @@ a {
     color: white;
 }
 
-/************************** NAVBAR SIDE (moyens & grands écrans) **************************/
-
-.navside {
-    justify-content: space-between;
-    align-content: stretch;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-width: 100%;
-    text-align: center;
-}
-
-.navside a {
-    /*   background-color:purple; */
-    width: 100%;
-    padding: 25px 0;
-    color: white;
-}
-
-.navside a:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-    color: white;
-}
-
-.navside .nav-link.active {
-    background-color: rgba(255, 255, 255, 0.45);
-}
-
-/************************** NAVBAR BOTTOM (tablettes & mobiles) **************************/
+/************************** NAVBAR BOTTOM **************************/
 
 .navbottom {
     padding: 0;
