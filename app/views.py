@@ -1,5 +1,6 @@
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.views.generic import CreateView
 from django.views.generic import RedirectView
@@ -14,6 +15,39 @@ from app import forms
 def index_view(request):
     context = {}
     return render(request, 'index.html', context)
+
+
+@login_required(login_url='feed')
+def feed_view(request):
+    context = {}
+    return render(request, 'feed.html', context)
+
+
+class NewReview(LoginRequiredMixin, CreateView):
+    login_url = 'login/'
+    redirect_field_name = 'redirect_to'
+    form_class = forms.NewReviewForm
+    success_url = reverse_lazy('feed')
+    template_name = 'new_review.html'
+
+    # TODO: 2 forms via le membre form
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        return super().form_valid(form)
+
+
+class NewReviewRequest(LoginRequiredMixin, CreateView):
+    login_url = 'login/'
+    redirect_field_name = 'redirect_to'
+    form_class = forms.NewReviewRequestForm
+    success_url = reverse_lazy('feed')
+    template_name = 'new_review_request.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        return super().form_valid(form)
 
 
 class SignUp(CreateView):

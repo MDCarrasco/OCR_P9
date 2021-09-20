@@ -194,33 +194,14 @@ a {
     width: auto;
     height: 100vh;
     position: relative;
-    background-color: #CDCDCD;
-    -webkit-background-image: linear-gradient(180deg,
-    rgba(9,121,96, 1) 10%,
-    rgba(9,121,96, 0.88) 30%,
-    rgba(0,255,126, 0.88) 80%,
-    rgba(0,255,126, 1) 100%),
-
-    url('/static/img/ville_puteaux.jpeg');
-    -moz-background-image: linear-gradient(180deg,
-    rgba(9,121,96, 1) 10%,
-    rgba(9,121,96, 0.88) 30%,
-    rgba(0,255,126, 0.88) 80%,
-    rgba(0,255,126, 1) 100%),
-
-    url('/static/img/ville_puteaux.jpeg');
-    background-image: linear-gradient(180deg,
-    rgba(9,121,96, 1) 10%,
-    rgba(9,121,96, 0.88) 30%,
-    rgba(0,255,126, 0.88) 80%,
-    rgba(0,255,126, 1) 100%),
-    url('/static/img/ville_puteaux.jpeg');
     color: #ffffff;
     text-align: center;
-    background-repeat: no-repeat;
-    background-position: top;
     background-size: cover;
-    background-attachment: fixed;
+    background: #CDCDCD linear-gradient(180deg,
+    rgba(9, 121, 96, 1) 10%,
+    rgba(9, 121, 96, 0.88) 30%,
+    rgba(0, 255, 126, 0.88) 80%,
+    rgba(0, 255, 126, 1) 100%) no-repeat fixed top;
     display: flex;
 }
 
@@ -279,15 +260,11 @@ a {
 }
 
 .bg-gradient {
-    background-image: linear-gradient(180deg,
-    rgba(9,121,96, 1) 10%,
-    rgba(9,121,96, 0.88) 30%,
-    rgba(0,255,126, 0.88) 80%,
-    rgba(0,255,126, 1) 100%),
-    url('/static/img/ville_puteaux3.jpg');
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-position: top;
+    background: linear-gradient(180deg,
+    rgba(9, 121, 96, 1) 10%,
+    rgba(9, 121, 96, 0.88) 30%,
+    rgba(0, 255, 126, 0.88) 80%,
+    rgba(0, 255, 126, 1) 100%) no-repeat fixed top;
     background-size: cover;
     display: flex;
 }

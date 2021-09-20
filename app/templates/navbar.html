@@ -8,6 +8,7 @@
 {% static "images/follow_users.svg" as account_follow_icon %}
 {% static "images/logout.svg" as logout_icon %}
 {% url "index" as index_url %}
+{% url "feed" as feed_url %}
 {% url "logout" as logout_url %}
 
 {# ************************** navtop big screens **************************  #}
@@ -20,7 +21,7 @@
             </a>
         </div>
         <div class="navtop-block">
-            <a class="nav-link" href="{{ index_url }}" data-toggle="tooltip" data-placement="right"
+            <a class="nav-link" href="{{ feed_url }}" data-toggle="tooltip" data-placement="right"
                title="Mon flux">
                 <img src="{{ feed_icon }}" alt="" class="navbar-icon">
             </a>

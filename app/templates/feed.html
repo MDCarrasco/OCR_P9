@@ -1,0 +1,61 @@
+{% extends 'base_index.html' %}
+{% load static %}
+
+{% block title %}
+    Flux {{ block.super }}
+{% endblock title %}
+
+{% block content %}
+    {# Variables #}
+    {% url "new_review" as new_review_url %}
+    {% url "new_review_request" as new_review_request_url %}
+
+    <div id="block-content-home">
+
+        <!-- ************************** HEADER ************************** -->
+        <header>
+            {# NAVBAR MAIN TOP #}
+            {% block navbar %}
+                {% include "navbar.html" %}
+            {% endblock navbar %}
+        </header>
+        <div id="content-def-bp">
+            <div class="center-block text-center">
+                <div class="col d-flex justify-content-center mb-4">
+                    <a class="btn btn-secondary btn-lg mr-2" href="{{ new_review_request_url }}">Demander une critique</a>
+                    <a class="btn btn-secondary btn-lg ml-2" href="{{ new_review_url }}">Créer une critique</a>
+                </div>
+                <div class="col d-flex justify-content-center mb-4">
+                    <div class="card bg-light mb-3">
+                        <div class="card-header">Flux</div>
+                        <div class="card-body">
+                            <h5 class="card-title">En cours de Développement</h5>
+                            <p class="card-text">Ici se trouvera le saint flux. Il sera fourni et utile et tout le monde (l'utilisateur loggué) s'en abreuvera quotidiennement.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer id="footer" class="mt-5 py-5 bg-dark">
+            <div class="container">
+
+                <div class="logo-footer mb-3">
+                </div>
+
+                <div class="menu-footer d-flex flex-column flex-md-row">
+                    <a href="{% url 'feed' %}">Flux</a>
+                    <a href="LITReview@adressequinexistepas.com">Contact</a>
+
+                </div>
+
+                <div class="text-center text-muted mt-4">
+                    <span>
+                        © Copyright 2021 -
+                        <a href="https://github.com/MDCarrasco/OCR_P9" target="_blank" class="text-muted">Michael Carrasco</a>
+                        - Tous droits réservés -
+                    </span>
+                </div>
+            </div>
+        </footer>
+    </div>
+{% endblock content %}

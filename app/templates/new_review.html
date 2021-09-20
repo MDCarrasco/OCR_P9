@@ -1,8 +1,9 @@
 {% extends 'base_index.html' %}
+{% load bootstrap4 %}
 {% load static %}
 
 {% block title %}
-    Accueil {{ block.super }}
+    Flux {{ block.super }}
 {% endblock title %}
 
 {% block content %}
@@ -15,25 +16,26 @@
             {% block navbar %}
                 {% include "navbar.html" %}
             {% endblock navbar %}
-
-            {# IMAGE HEADER #}
-            <div class="header-home">
-                <div class="container contenu-header-home">
-                    <p>
-                        <img src="{% static 'images/LITReview_logo.png' %}" alt="" class="logo">
-                    </p>
-                </div>
-            </div>
         </header>
-        <footer id="footer" class="py-5 bg-dark">
+        <div id="content-def-bp">
+            <!-- <h1 class="titre-accounts">Livre / Article</h1> -->
+            <h1 class="titre-accounts">Critique</h1>
+
+            <form method="POST">
+                {% csrf_token %}
+                {% bootstrap_form form show_help=False %}
+                <input type="submit" class="btn btn-dark bouton-accounts" value="Envoyer">
+            </form>
+        </div>
+        <footer id="footer" class="mt-5 py-5 bg-dark">
             <div class="container">
 
                 <div class="logo-footer mb-3">
                 </div>
 
                 <div class="menu-footer d-flex flex-column flex-md-row">
-                    <a href="{% url 'index' %}">Accueil</a>
-                    <a href="LITReview@adresseimpossiblequinexistepas.com">Contact</a>
+                    <a href="{% url 'feed' %}">Flux</a>
+                    <a href="LITReview@adressequinexistepas.com">Contact</a>
 
                 </div>
 
