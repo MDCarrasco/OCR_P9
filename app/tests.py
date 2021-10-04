@@ -17,8 +17,8 @@ class AuthTester(test.TestCase):
         sign_up_form = UserCreateForm(data={
             "username": "test_user",
             "email": "test_user@gmail.com",
-            "password1": "12345",
-            "password2": "12345"
+            "password1": "azerty1234",
+            "password2": "azerty1234"
         })
         # sign_up_form.username = "test_user"
         # sign_up_form.email = "test_user@gmail.com"
@@ -29,15 +29,15 @@ class AuthTester(test.TestCase):
         sign_up_view.request = mock_request
         sign_up_view.form_valid(sign_up_form)
 
-        expected_user = User.objects.create(username="test_user")
+        expected_user = User.objects.create(username="expected_test_user")
         expected_user.email = "test_user@gmail.com"
-        expected_user.set_password("12345")
+        expected_user.set_password("azerty1234")
         expected_user.save()
 
         user = User.objects.get(username="test_user")
 
         self.assertEqual(user.email, expected_user.email)
-        self.assertTrue(user.check_password("12345"))
+        self.assertTrue(user.check_password("azerty1234"))
 
     def test_log_in_good(self):
         user = User.objects.create(username="test_user")

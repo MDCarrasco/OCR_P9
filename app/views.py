@@ -2,7 +2,8 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
-from django.views.generic import CreateView
+from django.http import HttpResponseRedirect
+from django.views.generic import CreateView, TemplateView
 from django.views.generic import RedirectView
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -23,26 +24,64 @@ def feed_view(request):
     return render(request, 'feed.html', context)
 
 
-class NewReview(LoginRequiredMixin, CreateView):
-    login_url = 'login/'
-    redirect_field_name = 'redirect_to'
-    form_class = forms.NewReviewForm
-    success_url = reverse_lazy('feed')
-    template_name = 'new_review.html'
-
-    # TODO: 2 forms via le membre form
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        form.save()
-        return super().form_valid(form)
-
-
 class NewReviewRequest(LoginRequiredMixin, CreateView):
     login_url = 'login/'
     redirect_field_name = 'redirect_to'
     form_class = forms.NewReviewRequestForm
     success_url = reverse_lazy('feed')
     template_name = 'new_review_request.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        return super().form_valid(form)
+
+
+class NewReviewWithoutTicket(TemplateView):
+
+    login_url = 'login/'
+    redirect_field_name = 'redirect_to'
+    new_review_request_form = forms.NewReviewRequestForm
+    new_review_form = forms.NewReviewForm
+    success_url = reverse_lazy('feed')
+    template_name = 'new_review_without_ticket.html'
+
+    def post(self, request):
+        post_data = request.POST or None
+        new_review_request_form = self.new_review_request_form(
+            post_data, prefix="newreviewrequest"
+        )
+        new_review_form = self.new_review_form(
+            post_data, prefix="newreview"
+        )
+
+        context = self.get_context_data(
+            new_review_request_form=new_review_request_form,
+            new_review_form=new_review_form
+        )
+
+        if new_review_request_form.is_valid() and new_review_form.is_valid():
+            review_request = self.form_save(new_review_request_form)
+            print("id is:", review_request.id)
+            self.form_save(new_review_form)
+
+        return self.render_to_response(context)
+
+    def form_save(self, form, ticket):
+        form.instance.user = self.request.user
+        obj = form.save()
+        return obj
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request)
+
+
+class NewReviewWithTicket(LoginRequiredMixin, CreateView):
+    login_url = 'login/'
+    redirect_field_name = 'redirect_to'
+    form_class = forms.NewReviewForm
+    success_url = reverse_lazy('feed')
+    template_name = 'new_review_with_ticket.html'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
