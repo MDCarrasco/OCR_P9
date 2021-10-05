@@ -85,7 +85,6 @@ class NewReviewWithoutTicket(TemplateView):
         )
 
         if new_review_request_form.is_valid() and new_review_form.is_valid():
-            print("first form image field url", new_review_request_form.fields["image"].deconstruct())
             review_request = self.form_save(new_review_request_form)
             self.form_save(new_review_form, review_request)
             return HttpResponseRedirect(self.success_url)

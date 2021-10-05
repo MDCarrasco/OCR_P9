@@ -61,7 +61,7 @@
                                             </div>
                                             <div class="col d-flex mb-2">
                                                 {% if item.ticket.image %}
-                                                    <img src="{{ media_url }}{{ item.ticket.image }}" alt="{{ item.ticket.image }}"/>
+                                                    <img class="img-max" src="{{ item.ticket.image.url }}" alt="{{ item.ticket.image }}"/>
                                                 {% endif %}
                                             </div>
                                         </div>
