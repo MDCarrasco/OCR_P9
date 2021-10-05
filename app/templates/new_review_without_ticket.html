@@ -19,10 +19,10 @@
         <div id="content-def-bp">
             <div class="center-block text-center">
                 <div class="col d-flex justify-content-center mb-4">
-                    <h1 class="titre-accounts">Creer une critique</h1>
+                    <h1 class="titre-accounts">Créer une critique</h1>
                 </div>
             </div>
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 <h1 class="titre-accounts">Livre/Article</h1>
                 {% csrf_token %}
                 {% bootstrap_form new_review_request_form show_help=False %}

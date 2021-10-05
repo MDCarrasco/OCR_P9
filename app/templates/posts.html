@@ -1,0 +1,120 @@
+{% extends 'base_index.html' %}
+{% load static %}
+
+{% block title %}
+    Flux {{ block.super }}
+{% endblock title %}
+
+{% block content %}
+    {# Variables #}
+    {% url "edit_review" as edit_review_url %}
+    {% url "delete_review" as delete_review_url %}
+    {% url "edit_ticket" as edit_ticket_url %}
+    {% url "delete_ticket" as delete_ticket_url %}
+
+    <div id="block-content-home">
+        <!-- ************************** HEADER ************************** -->
+        <header>
+            {# NAVBAR MAIN TOP #}
+            {% block navbar %}
+                {% include "navbar.html" %}
+            {% endblock navbar %}
+        </header>
+        <div id="content-def-bp">
+            <div class="center-block text-center">
+                <div class="col d-flex justify-content-center mb-4">
+                    <div class="card bg-light mb-3">
+                        <div class="card-header">Vos posts</div>
+                        {% for item in tickets_and_reviews %}
+                            {% if item.rating %}
+                                <div class="card-body">
+                                    <div class="col d-flex justify-content-between mb-2">
+                                        <p class="card-title ml-2">Vous avez publié une critique</p>
+                                        <p class="card-title mr-2">{{ item.time_created }}</p>
+                                    </div>
+                                    <div class="col d-flex mb-2">
+                                        <p class="card-title ml-2">{{ item.headline }} - </p>
+                                       <div class="django-starfield" id="django-starfield-newreview-rating">
+                                           {% widthratio item.rating 1 -1 as negative_item_rating %}
+                                           {% with rest=negative_item_rating|add:"5" %}
+                                               {% if rest %}
+                                                   {% for i in "x"|rjust:rest %}
+                                                       <label for="newreview-rating-{{ forloop.counter }}" style="color:lightgray;"></label>
+                                                   {% endfor %}
+                                               {% endif %}
+                                           {% endwith %}
+                                           {% for i in "x"|rjust:item.rating %}
+                                               <label for="newreview-rating-{{ forloop.counter }}" style="filter:none"></label>
+                                           {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="col d-flex mb-2">
+                                        <p class="card-title ml-2">{{ item.body }}</p>
+                                    </div>
+                                    <div class="card text-white bg-success mb-3">
+                                        <div class="card-body">
+                                            <div class="col d-flex mb-2">
+                                                <p class="card-title ml-2">Ticket - Vous</p>
+                                            </div>
+                                            <div class="col d-flex mb-2">
+                                                <p class="card-title ml-2">{{ item.ticket.title }}</p>
+                                            </div>
+                                            <div class="col d-flex mb-2">
+                                                {% if item.ticket.image %}
+                                                    <img src="{{ media_url }}{{ item.ticket.image }}" alt="{{ item.ticket.image }}"/>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col d-flex justify-content-end mb-2">
+                                        <a class="btn btn-secondary btn-md mr-2" href="{{ edit_review_url }}">Modifier</a>
+                                        <a class="btn btn-secondary btn-md" href="{{ delete_review_url }}">Supprimer</a>
+                                    </div>
+                                    <hr class="mt-4"/>
+                                </div>
+                            {% else %}
+                                <div class="card-body">
+                                    <div class="col d-flex justify-content-between mb-2">
+                                        <p class="card-title ml-2">Vous avez publié un ticket</p>
+                                        <p class="card-title ml-2">{{ item.time_created }}</p>
+                                    </div>
+                                    <div class="col d-flex mb-2">
+                                        <p class="card-title ml-2">{{ item.title }}</p>
+                                    </div>
+                                    <div class="col d-flex mb-2">
+                                        {% if item.image %}
+                                            <img class="img-max mb-2" src="{{ item.image.url }}" alt="image"/>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col d-flex justify-content-end mb-2">
+                                        <a class="btn btn-secondary btn-md mr-2" href="{{ edit_ticket_url }}">Modifier</a>
+                                        <a class="btn btn-secondary btn-md" href="{{ delete_ticket_url }}">Supprimer</a>
+                                    </div>
+                                    <hr class="mt-4"/>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer id="footer" class="mt-5 py-5 bg-dark">
+            <div class="container">
+                <div class="logo-footer mb-3">
+                </div>
+
+                <div class="menu-footer d-flex flex-column flex-md-row">
+                    <a href="{% url 'feed' %}">Flux</a>
+                    <a href="LITReview@adressequinexistepas.com">Contact</a>
+                </div>
+                <div class="text-center text-muted mt-4">
+                    <span>
+                        © Copyright 2021 -
+                        <a href="https://github.com/MDCarrasco/OCR_P9" target="_blank" class="text-muted">Michael Carrasco</a>
+                        - Tous droits réservés -
+                    </span>
+                </div>
+            </div>
+        </footer>
+    </div>
+{% endblock content %}

@@ -20,7 +20,7 @@
         <div id="content-def-bp">
             <h1 class="titre-accounts">Créer un ticket</h1>
 
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% bootstrap_form form show_help=False %}
                 <input type="submit" class="btn btn-dark bouton-accounts" value="Envoyer">

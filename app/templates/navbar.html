@@ -9,6 +9,7 @@
 {% static "images/logout.svg" as logout_icon %}
 {% url "index" as index_url %}
 {% url "feed" as feed_url %}
+{% url "posts" as posts_url %}
 {% url "logout" as logout_url %}
 
 {# ************************** navtop big screens **************************  #}
@@ -25,7 +26,7 @@
                title="Mon flux">
                 <img src="{{ feed_icon }}" alt="" class="navbar-icon">
             </a>
-            <a class="nav-link" href="{{ index_url }}" data-toggle="tooltip" data-placement="right"
+            <a class="nav-link" href="{{ posts_url }}" data-toggle="tooltip" data-placement="right"
                title="Mes posts">
                 <img src="{{ posts_icon }}" alt="" class="navbar-icon">
             </a>

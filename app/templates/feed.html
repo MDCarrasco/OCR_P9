@@ -7,8 +7,8 @@
 
 {% block content %}
     {# Variables #}
-    {% url "new_review_without_ticket" as new_review_url %}
     {% url "new_review_request" as new_review_request_url %}
+    {% url "new_review_without_ticket" as new_review_without_ticket_url %}
 
     <div id="block-content-home">
 
@@ -23,15 +23,88 @@
             <div class="center-block text-center">
                 <div class="col d-flex justify-content-center mb-4">
                     <a class="btn btn-secondary btn-lg mr-2" href="{{ new_review_request_url }}">Demander une critique</a>
-                    <a class="btn btn-secondary btn-lg ml-2" href="{{ new_review_url }}">Créer une critique</a>
+                    <a class="btn btn-secondary btn-lg ml-2" href="{{ new_review_without_ticket_url }}">Créer une critique</a>
                 </div>
                 <div class="col d-flex justify-content-center mb-4">
                     <div class="card bg-light mb-3">
                         <div class="card-header">Flux</div>
-                        <div class="card-body">
-                            <h5 class="card-title">En cours de Développement</h5>
-                            <p class="card-text">Ici se trouvera le saint flux. Il sera fourni et utile et tout le monde (l'utilisateur loggué) s'en abreuvera quotidiennement.</p>
-                        </div>
+                        {% for item in tickets_and_reviews %}
+                            {% if item.rating %}
+                                <div class="card-body">
+                                    <div class="col d-flex justify-content-between mb-2">
+                                        {% if user == item.user %}
+                                            <p class="card-title ml-2">Vous avez publié une critique</p>
+                                        {% else %}
+                                            <p class="card-title ml-2">{{ item.user }} a publié une critique</p>
+                                        {% endif %}
+                                        <p class="card-title mr-2">{{ item.time_created }}</p>
+                                    </div>
+                                    <div class="col d-flex mb-2">
+                                        <p class="card-title ml-2">{{ item.headline }}</p>
+                                        <div class="django-starfield" id="django-starfield-newreview-rating">
+                                            {% widthratio item.rating 1 -1 as negative_item_rating %}
+                                            {% with rest=negative_item_rating|add:"5" %}
+                                                {% if rest %}
+                                                    {% for i in "x"|rjust:rest %}
+                                                        <label for="newreview-rating-{{ forloop.counter }}" style="color:lightgray;"></label>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endwith %}
+                                            {% for i in "x"|rjust:item.rating %}
+                                                <label for="newreview-rating-{{ forloop.counter }}" style="filter:none"></label>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="col d-flex mb-2">
+                                        <p class="card-title ml-2">{{ item.body }}</p>
+                                    </div>
+                                    <div class="card text-white bg-success mb-3">
+                                        <div class="card-body">
+                                            <div class="col d-flex mb-2">
+                                                <p class="card-title ml-2">Ticket -</p>
+                                                {% if item.ticket.user != user %}
+                                                    <p class="card-title ml-2">{{ item.ticket.user }}</p>
+                                                {% else %}
+                                                    <p class="card-title ml-2">Vous</p>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col d-flex mb-2">
+                                                <p class="card-title ml-2">{{ item.ticket.title }}</p>
+                                            </div>
+                                            <div class="col d-flex mb-2">
+                                                {% if item.ticket.image %}
+                                                    <img class="img-max" src="{{ item.ticket.image.url }}" alt="{{ item.ticket.image }}"/>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="mt-4"/>
+                                </div>
+                            {% else %}
+                                <div class="card-body">
+                                    <div class="col d-flex justify-content-between mb-2">
+                                        {% if user == item.user %}
+                                            <p class="card-title ml-2">Vous avez demandé une critique</p>
+                                        {% else %}
+                                            <p class="card-title ml-2">{{ item.user }} a demandé une critique</p>
+                                        {% endif %}
+                                        <p class="card-text ml-2">{{ item.time_created }}</p>
+                                    </div>
+                                    <div class="col d-flex mb-2">
+                                        <p class="card-title ml-2">{{ item.title }}</p>
+                                    </div>
+                                    <div class="col d-flex mb-2">
+                                        {% if item.image %}
+                                            <img class="img-max mb-2" src="{{ item.image.url }}" alt="image"/>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col d-flex justify-content-end mb-2">
+                                        <a class="btn btn-secondary btn-md mr-2" href="{% url "new_review_with_ticket" ticket_id=item.id %}">Créer une critique</a>
+                                    </div>
+                                    <hr class="mt-4"/>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
             </div>

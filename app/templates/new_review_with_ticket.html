@@ -18,10 +18,37 @@
             {% endblock navbar %}
         </header>
         <div id="content-def-bp">
-            <!-- <h1 class="titre-accounts">Livre / Article</h1> -->
-            <h1 class="titre-accounts">Critique</h1>
 
-            <form method="POST">
+            <div class="center-block text-center">
+                <div class="col d-flex justify-content-center mb-4">
+                    <h1 class="titre-accounts">Créer une critique</h1>
+                </div>
+            </div>
+            <h1 class="titre-accounts">Vous êtes en train de poster en réponse à</h1>
+            <div class="card-body">
+                <div class="col d-flex justify-content-between mb-2">
+                    {% if user == ticket.user %}
+                        <p class="card-title ml-2">Vous avez demandé une critique</p>
+                    {% else %}
+                        <p class="card-title ml-2">{{ ticket.user }} a demandé une critique</p>
+                    {% endif %}
+                    <p class="card-title ml-2">{{ ticket.time_created }}</p>
+                </div>
+                <div class="col d-flex mb-2">
+                    <p class="card-title ml-2">{{ ticket.title }}</p>
+                </div>
+                <div class="col d-flex mb-2">
+                    <p class="card-title ml-2">{{ ticket.description }}</p>
+                </div>
+                <div class="col d-flex mb-2">
+                    {% if ticket.image %}
+                        <img class="img-max mb-2" src="{{ ticket.image.url }}" alt="image"/>
+                    {% endif %}
+                </div>
+                <hr class="mt-4"/>
+            </div>
+            <h1 class="titre-accounts">Critique</h1>
+            <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% bootstrap_form form show_help=False %}
                 <input type="submit" class="btn btn-dark bouton-accounts" value="Envoyer">
