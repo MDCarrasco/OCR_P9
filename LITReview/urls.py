@@ -25,6 +25,26 @@ urlpatterns = [
 		name='new_review_with_ticket'
 	),
 	path('posts/', views.posts_view, name='posts'),
+	path(
+		'posts/edit_review_request/<pk>/',
+		views.UpdateReviewRequest.as_view(),
+		name='edit_review_request'
+	),
+	path(
+		'posts/delete_ticket/<pk>/',
+		views.DeleteReviewRequest.as_view(),
+		name='delete_review_request'
+	),
+	path(
+		'posts/edit_review/<pk>/',
+		views.UpdateReview.as_view(),
+		name='edit_review'
+	),
+	path(
+		'posts/delete_review/<pk>/',
+		views.DeleteReview.as_view(),
+		name='delete_review'
+	),
 	path('signup/', views.SignUp.as_view(), name='signup'),
 	path('login/', views.Login.as_view(), name='login'),
 	path('logout/', views.Logout.as_view(), name='logout'),

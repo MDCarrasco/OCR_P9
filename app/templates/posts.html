@@ -6,12 +6,6 @@
 {% endblock title %}
 
 {% block content %}
-    {# Variables #}
-    {% url "edit_review" as edit_review_url %}
-    {% url "delete_review" as delete_review_url %}
-    {% url "edit_ticket" as edit_ticket_url %}
-    {% url "delete_ticket" as delete_ticket_url %}
-
     <div id="block-content-home">
         <!-- ************************** HEADER ************************** -->
         <header>
@@ -67,8 +61,8 @@
                                         </div>
                                     </div>
                                     <div class="col d-flex justify-content-end mb-2">
-                                        <a class="btn btn-secondary btn-md mr-2" href="{{ edit_review_url }}">Modifier</a>
-                                        <a class="btn btn-secondary btn-md" href="{{ delete_review_url }}">Supprimer</a>
+                                        <a class="btn btn-secondary btn-md mr-2" href="{% url "edit_review" pk=item.id %}">Modifier</a>
+                                        <a class="btn btn-secondary btn-md" href="{% url "delete_review" pk=item.id %}">Supprimer</a>
                                     </div>
                                     <hr class="mt-4"/>
                                 </div>
@@ -87,8 +81,8 @@
                                         {% endif %}
                                     </div>
                                     <div class="col d-flex justify-content-end mb-2">
-                                        <a class="btn btn-secondary btn-md mr-2" href="{{ edit_ticket_url }}">Modifier</a>
-                                        <a class="btn btn-secondary btn-md" href="{{ delete_ticket_url }}">Supprimer</a>
+                                        <a class="btn btn-secondary btn-md mr-2" href="{% url "edit_review_request" pk=item.id %}">Modifier</a>
+                                        <a class="btn btn-secondary btn-md" href="{%  url "delete_review_request" pk=item.id %}">Supprimer</a>
                                     </div>
                                     <hr class="mt-4"/>
                                 </div>

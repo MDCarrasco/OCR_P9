@@ -5,7 +5,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView
+from django.views.generic import UpdateView
+from django.views.generic import DeleteView
+from django.views.generic import TemplateView
 from django.views.generic import RedirectView
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -22,7 +25,7 @@ def index_view(request):
     return render(request, 'index.html', context)
 
 
-@login_required(login_url='feed')
+@login_required(login_url='login')
 def feed_view(request):
     tickets = list(Ticket.objects.all())
     reviews = list(Review.objects.all())
@@ -35,7 +38,7 @@ def feed_view(request):
     return render(request, 'feed.html', context)
 
 
-@login_required(login_url='posts')
+@login_required(login_url='login')
 def posts_view(request):
     tickets = list(Ticket.objects.filter(user=request.user))
     reviews = list(Review.objects.filter(user=request.user))
@@ -49,6 +52,10 @@ def posts_view(request):
 
 
 class NewReviewRequest(LoginRequiredMixin, CreateView):
+    """
+    review request <==> ticket
+    """
+
     login_url = 'login/'
     redirect_field_name = 'redirect_to'
     form_class = forms.NewReviewRequestForm
@@ -59,6 +66,32 @@ class NewReviewRequest(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         form.save()
         return super().form_valid(form)
+
+
+class UpdateReviewRequest(LoginRequiredMixin, UpdateView):
+
+    login_url = 'login/'
+    redirect_field_name = 'redirect_to'
+    form_class = forms.NewReviewRequestForm
+    success_url = reverse_lazy('posts')
+    template_name = 'edit_review_request.html'
+    model = Ticket
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        return super().form_valid(form)
+
+
+class DeleteReviewRequest(LoginRequiredMixin, DeleteView):
+
+    login_url = 'login/'
+    redirect_field_name = 'redirect_to'
+    success_url = reverse_lazy('posts')
+    model = Ticket
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
 
 
 class NewReviewWithoutTicket(TemplateView):
@@ -134,6 +167,32 @@ class NewReviewWithTicket(LoginRequiredMixin, CreateView):
         review.ticket = context["ticket"]
         review.save()
         return super().form_valid(form)
+
+
+class UpdateReview(LoginRequiredMixin, UpdateView):
+
+    login_url = 'login/'
+    redirect_field_name = 'redirect_to'
+    form_class = forms.NewReviewForm
+    success_url = reverse_lazy('posts')
+    template_name = 'edit_review.html'
+    model = Review
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        return super().form_valid(form)
+
+
+class DeleteReview(LoginRequiredMixin, DeleteView):
+
+    login_url = 'login/'
+    redirect_field_name = 'redirect_to'
+    success_url = reverse_lazy('posts')
+    model = Review
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
 
 
 class SignUp(CreateView):
