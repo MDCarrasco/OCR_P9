@@ -4,13 +4,13 @@
         {% for user in users %}
             {% if user in followed_users %}
                 <li>{{ user.username }}
-                    <a href="#" class="following btn btn-success">
+                    <a href="#" id="{{ user.id }}" class="following btn btn-success">
                         &check; Following
                     </a>
                 </li>
             {% else %}
                 <li>{{ user.username }}
-                    <a href="#" class="follow btn btn-light">
+                    <a href="#" id="{{ user.id }}" class="follow btn btn-light">
                         Follow
                     </a>
                 </li>

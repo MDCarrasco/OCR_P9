@@ -1,7 +1,13 @@
-$(document).on("click", ".follow", function(e) {
-    $(this).removeClass("follow btn-light");
-    $(this).addClass("following btn-success");
-    $(this).html("&check; Following");
+$(document).on("click", ".follow", function() {
+    $.ajax({
+        type: "POST",
+        context: this,
+        url: "follow/" + $(this).attr("id")
+    }).done(function(){
+        $(this).removeClass("follow btn-light");
+        $(this).addClass("following btn-success");
+        $(this).html("&check; Following");
+    })
 });
 
 $(document).on("mouseover", ".follow", function(e) {
@@ -14,10 +20,16 @@ $(document).on("mouseout", ".follow", function(e) {
     $(this).addClass("btn-light");
 });
 
-$(document).on("click", ".following", function(e) {
-    $(this).removeClass("following btn-danger");
-    $(this).addClass("follow btn-light");
-    $(this).html("Follow");
+$(document).on("click", ".following", function() {
+    $.ajax({
+        type: "POST",
+        context: this,
+        url: "unfollow/" + $(this).attr("id")
+    }).done(function(){
+        $(this).removeClass("following btn-danger");
+        $(this).addClass("follow btn-light");
+        $(this).html("Follow");
+    })
 });
 
 $(document).on("mouseover", ".following", function(e) {

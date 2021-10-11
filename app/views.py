@@ -5,11 +5,14 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
+from django.core import serializers
+from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView
 from django.views.generic import DeleteView
 from django.views.generic import RedirectView
@@ -67,11 +70,12 @@ def account_follow_view(request):
     url_parameter = request.GET.get("q")
 
     if url_parameter:
-        users = user.objects.filter(username__icontains=url_parameter)
+        users = user.objects.filter(username__icontains=url_parameter).exclude(id=request.user.id)
     else:
-        users = user.objects.all()
+        users = user.objects.all().exclude(id=request.user.id)
 
     context["users"] = users
+    # context["serzd_users"] = serializer.serialize("json", users)
     context["followed_users"] = followed_users
 
     if request.is_ajax():
@@ -88,6 +92,26 @@ def account_follow_view(request):
         return JsonResponse(data=data_dict, safe=False)
 
     return render(request, "account_follow.html", context=context)
+
+
+@login_required(login_url='login')
+@csrf_exempt
+def follow(request, user_id):
+    users_to_follow = get_user_model()
+    UserFollows(
+        user=request.user,
+        followed_user=users_to_follow.objects.get(pk=user_id)
+    ).save()
+
+    return account_follow_view(request)
+
+
+@login_required(login_url='login')
+@csrf_exempt
+def unfollow(request, user_id):
+    UserFollows.objects.get(followed_user_id=user_id).delete()
+
+    return account_follow_view(request)
 
 
 class NewReviewRequest(LoginRequiredMixin, CreateView):

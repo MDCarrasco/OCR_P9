@@ -1,6 +1,6 @@
 const user_input = $("#user-input")
 const search_icon = $('#search-icon')
-const artists_div = $('#replaceable-content')
+const users_div = $('#replaceable-content')
 const endpoint = '/account_follow/'
 const delay_by_in_ms = 400
 let scheduled_function = false
@@ -9,11 +9,11 @@ let ajax_call = function (endpoint, request_parameters) {
     $.getJSON(endpoint, request_parameters)
         .done(response => {
             // fade out the artists_div, then:
-            artists_div.fadeTo('slow', 0).promise().then(() => {
+            users_div.fadeTo('slow', 0).promise().then(() => {
             // replace the HTML contents
-            artists_div.html(response['html_from_view'])
+            users_div.html(response['html_from_view'])
             // fade-in the div with new contents
-            artists_div.fadeTo('slow', 1)
+            users_div.fadeTo('slow', 1)
             // stop animating search icon
             search_icon.removeClass('blink')
         })

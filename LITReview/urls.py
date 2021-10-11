@@ -46,6 +46,16 @@ urlpatterns = [
 		name='delete_review'
 	),
 	path('account_follow/', views.account_follow_view, name='account_follow'),
+	path(
+		'account_follow/follow/<int:user_id>',
+		views.follow,
+		name='follow'
+	),
+	path(
+		'account_follow/unfollow/<int:user_id>',
+		views.unfollow,
+		name='unfollow'
+	),
 	path('signup/', views.SignUp.as_view(), name='signup'),
 	path('login/', views.Login.as_view(), name='login'),
 	path('logout/', views.Logout.as_view(), name='logout'),
