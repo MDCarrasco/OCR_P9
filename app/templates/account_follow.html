@@ -1,0 +1,57 @@
+{% extends 'base_index.html' %}
+{% load static %}
+
+{% block title %}
+    Flux {{ block.super }}
+{% endblock title %}
+
+{% block content %}
+    <div id="block-content-home">
+
+        <!-- ************************** HEADER ************************** -->
+        <header>
+            {# NAVBAR MAIN TOP #}
+            {% block navbar %}
+                {% include "navbar.html" %}
+            {% endblock navbar %}
+        </header>
+        <div id="content-def-bp">
+            <div class="center-block text-center">
+                <div class="col d-flex justify-content-center mb-4">
+                    <h1>Suivre d'autres utilisateurs</h1>
+                </div>
+                <div class="col d-flex justify-content-center mb-4">
+                    {# icon and search-box #}
+                    <div class="col-5 align-left">
+                        <i id="search-icon" class="fas fa-search"></i>
+                        <label for="user-input"></label>
+                        <input id="user-input" placeholder="Search">
+                    </div>
+                    {# user-list section #}
+                    <div id="replaceable-content" class="col-3">
+                        {% include 'user_results_partial.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer id="footer" class="mt-5 py-5 bg-dark">
+            <div class="container">
+                <div class="logo-footer mb-3">
+                </div>
+                <div class="menu-footer d-flex flex-column flex-md-row">
+                    <a href="{% url 'feed' %}">Flux</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="text-center text-muted mt-4">
+                    <span>
+                        © Copyright 2021 -
+                        <a href="https://github.com/MDCarrasco/OCR_P9" target="_blank" class="text-muted">Michael Carrasco</a>
+                        - Tous droits réservés -
+                    </span>
+                </div>
+            </div>
+            <script type="text/javascript" src="{% static "javascript/user_search.js" %}"></script>
+            <script type="text/javascript" src="{% static "javascript/user_follow.js" %}"></script>
+        </footer>
+    </div>
+{% endblock content %}

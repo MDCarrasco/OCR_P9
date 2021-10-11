@@ -45,6 +45,7 @@ urlpatterns = [
 		views.DeleteReview.as_view(),
 		name='delete_review'
 	),
+	path('account_follow/', views.account_follow_view, name='account_follow'),
 	path('signup/', views.SignUp.as_view(), name='signup'),
 	path('login/', views.Login.as_view(), name='login'),
 	path('logout/', views.Logout.as_view(), name='logout'),

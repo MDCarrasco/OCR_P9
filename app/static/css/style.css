@@ -17,6 +17,20 @@ body {
     color: #434343;
 }
 
+@keyframes blinker {
+    from {opacity: 1.0;}
+    to {opacity: 0.0;}
+}
+
+.blink {
+    text-decoration: blink;
+    animation-name: blinker;
+    animation-duration: 0.6s;
+    animation-iteration-count:infinite;
+    animation-timing-function:ease-in-out;
+    animation-direction: alternate;
+}
+
 .img-max {
     max-width: 500px;
     width:100%;
@@ -54,6 +68,18 @@ body {
 
 a {
     color: #097960;
+}
+
+#username {
+    color: black;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: 'Helvetica', sans-serif;
+}
+
+#username-text {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 #body_signup {

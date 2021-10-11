@@ -1,21 +1,25 @@
 from typing import Optional
 
 from django.contrib.auth import logout
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect
-from django.views.generic import CreateView
-from django.views.generic import UpdateView
-from django.views.generic import DeleteView
-from django.views.generic import TemplateView
-from django.views.generic import RedirectView
+from django.http import JsonResponse
 from django.shortcuts import render
+from django.template.loader import render_to_string
 from django.urls import reverse_lazy
+from django.views.generic import CreateView
+from django.views.generic import DeleteView
+from django.views.generic import RedirectView
+from django.views.generic import TemplateView
+from django.views.generic import UpdateView
 
-from app.models import Ticket
-from app.models import Review
 from app import forms
+from app.models import Review
+from app.models import Ticket
+from app.models import UserFollows
 
 
 # Create your views here.
@@ -49,6 +53,41 @@ def posts_view(request):
     )
     context = {"tickets_and_reviews": tickets_and_reviews}
     return render(request, 'posts.html', context)
+
+
+@login_required(login_url='login')
+def account_follow_view(request):
+    context = {}
+    user = get_user_model()
+    followed_users = list(user.objects.filter(
+        followed_by__in=UserFollows.objects.filter(
+            user_id=request.user.id
+        )
+    ))
+    url_parameter = request.GET.get("q")
+
+    if url_parameter:
+        users = user.objects.filter(username__icontains=url_parameter)
+    else:
+        users = user.objects.all()
+
+    context["users"] = users
+    context["followed_users"] = followed_users
+
+    if request.is_ajax():
+        html = render_to_string(
+            template_name="user_results_partial.html",
+            context={
+                "users": users,
+                "followed_users": followed_users
+            }
+        )
+
+        data_dict = {"html_from_view": html}
+
+        return JsonResponse(data=data_dict, safe=False)
+
+    return render(request, "account_follow.html", context=context)
 
 
 class NewReviewRequest(LoginRequiredMixin, CreateView):

@@ -1,0 +1,22 @@
+{# artists-results-partial.html #}
+{% if users %}
+    <ul style="list-style: none; text-align: left;">
+        {% for user in users %}
+            {% if user in followed_users %}
+                <li>{{ user.username }}
+                    <a href="#" class="following btn btn-success">
+                        &check; Following
+                    </a>
+                </li>
+            {% else %}
+                <li>{{ user.username }}
+                    <a href="#" class="follow btn btn-light">
+                        Follow
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Aucun utilisateur trouvé.</p>
+{% endif %}

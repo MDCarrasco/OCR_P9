@@ -10,31 +10,32 @@
 {% url "index" as index_url %}
 {% url "feed" as feed_url %}
 {% url "posts" as posts_url %}
+{% url "account_follow" as account_follow_url %}
 {% url "logout" as logout_url %}
 
 {# ************************** navtop big screens **************************  #}
 <div class="navtop-box d-none d-sm-block">
     <nav class="nav navtop container">
         <div class="navtop-block center-block">
-            <a class="nav-link active" href="{{ index_url }}" data-toggle="tooltip" data-placement="center"
-               title="Accueil">
+            <a id="username" class="nav-link" href="{{ index_url }}">
+                <p id="username-text">Salut {{ user }} !</p>
                 <img src="{{ litreview_text_png }}" alt="" class="navbar-brand">
             </a>
         </div>
         <div class="navtop-block">
-            <a class="nav-link" href="{{ feed_url }}" data-toggle="tooltip" data-placement="right"
+            <a class="nav-link" href="{{ feed_url }}" data-toggle="tooltip" data-placement="bottom"
                title="Mon flux">
                 <img src="{{ feed_icon }}" alt="" class="navbar-icon">
             </a>
-            <a class="nav-link" href="{{ posts_url }}" data-toggle="tooltip" data-placement="right"
+            <a class="nav-link" href="{{ posts_url }}" data-toggle="tooltip" data-placement="bottom"
                title="Mes posts">
                 <img src="{{ posts_icon }}" alt="" class="navbar-icon">
             </a>
-            <a class="nav-link" href="{{ index_url }}" data-toggle="tooltip" data-placement="right"
+            <a class="nav-link" href="{{ account_follow_url }}" data-toggle="tooltip" data-placement="bottom"
                title="Mes abonnements">
                 <img src="{{ account_follow_icon }}" alt="" class="navbar-icon">
             </a>
-            <a class="nav-link" href="{{ logout_url }}" data-toggle="tooltip" data-placement="right"
+            <a class="nav-link" href="{{ logout_url }}" data-toggle="tooltip" data-placement="bottom"
                title="Me deconnecter">
                 <img src="{{ logout_icon }}" alt="" class="navbar-icon">
             </a>
