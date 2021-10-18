@@ -5,8 +5,6 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
-from django.core import serializers
-from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -128,7 +126,7 @@ class NewReviewRequest(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.save()
-        return super().form_valid(form)
+        return HttpResponseRedirect(self.success_url)
 
 
 class UpdateReviewRequest(LoginRequiredMixin, UpdateView):
@@ -143,7 +141,7 @@ class UpdateReviewRequest(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.save()
-        return super().form_valid(form)
+        return HttpResponseRedirect(self.success_url)
 
 
 class DeleteReviewRequest(LoginRequiredMixin, DeleteView):
@@ -168,8 +166,9 @@ class NewReviewWithoutTicket(TemplateView):
 
     def post(self, request):
         post_data = request.POST or None
+        post_files = request.FILES or None
         new_review_request_form = self.new_review_request_form(
-            post_data, prefix="newreviewrequest"
+            post_data, post_files, prefix="newreviewrequest"
         )
         new_review_form = self.new_review_form(
             post_data, prefix="newreview"
@@ -203,7 +202,6 @@ class NewReviewWithoutTicket(TemplateView):
             review.save()
             return
         review_request = form.save()
-        print("image url after review request form sent:", review_request.image.url)
         return review_request
 
     def get(self, request, *args, **kwargs):

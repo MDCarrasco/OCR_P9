@@ -1,6 +1,10 @@
+import os
+
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.forms import HiddenInput
+from django.core.files import File
+from django.core.files.storage import default_storage
 from django.forms import ModelForm
 from django.forms import IntegerField
 from django_starfield import Stars
@@ -50,10 +54,25 @@ class NewReviewRequestForm(ModelForm):
         model = Ticket
 
     def __init__(self, *args, **kwargs):
+        path = os.path.join(settings.MEDIA_ROOT, 'images/default.jpeg')
+        default_file = open(path, 'rb')
+        self.default_django_file = File(default_file, name=("default.jpeg"))
+
         super(ModelForm, self).__init__(*args, **kwargs)
         self.fields['title'].label = 'Titre'
         self.fields['title'].required = True
         self.fields['description'].required = True
+        self.fields['image'].initial = self.default_django_file
+        self.fields['image'].initial.url = default_storage.url('images/default.jpeg')
+        print("url = ", self.fields['image'].initial.url)
+
+    def save(self, commit=True):
+        if not self.instance.image or not self.cleaned_data.get('image'):
+            self.default_django_file.name = "images/default.jpeg"
+            self.instance.image = self.default_django_file
+            self.instance.image._committed = True
+        super().save(commit)
+        return self.instance
 
 
 class UserCreateForm(UserCreationForm):

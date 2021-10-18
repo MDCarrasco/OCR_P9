@@ -26,6 +26,7 @@
                 <h1 class="titre-accounts">Livre/Article</h1>
                 {% csrf_token %}
                 {% bootstrap_form new_review_request_form show_help=False %}
+                <div class="image-area mt-4 mb-4"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
                 <h1 class="titre-accounts">Critique</h1>
                 {% csrf_token %}
                 {% bootstrap_form new_review_form show_help=False %}
@@ -49,6 +50,7 @@
                     </span>
                 </div>
             </div>
+            <script type="text/javascript" src="{% static "javascript/image_preview_double_form.js" %}"></script>
         </footer>
     </div>
 {% endblock content %}

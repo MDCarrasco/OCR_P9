@@ -3,11 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="638aa38b-459f-4409-a67d-14d9654d0025" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LITReview/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/LITReview/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/javascript/user_follow.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/javascript/user_follow.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/javascript/user_search.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/javascript/user_search.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/base_index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base_index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/user_results_partial.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/user_results_partial.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/edit_review_request.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/edit_review_request.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/new_review_request.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/new_review_request.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/new_review_without_ticket.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/new_review_without_ticket.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
@@ -73,13 +73,14 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/static/javascript" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/static/javascript" />
       <recent name="$PROJECT_DIR$/app/templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -128,7 +129,8 @@
       <workItem from="1632235727423" duration="112000" />
       <workItem from="1632726175616" duration="607000" />
       <workItem from="1633351839487" duration="34015000" />
-      <workItem from="1633942061248" duration="32282000" />
+      <workItem from="1633942061248" duration="33659000" />
+      <workItem from="1634545803961" duration="13983000" />
     </task>
     <servers />
   </component>
