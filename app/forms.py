@@ -64,7 +64,6 @@ class NewReviewRequestForm(ModelForm):
         self.fields['description'].required = True
         self.fields['image'].initial = self.default_django_file
         self.fields['image'].initial.url = default_storage.url('images/default.jpeg')
-        print("url = ", self.fields['image'].initial.url)
 
     def save(self, commit=True):
         if not self.instance.image or not self.cleaned_data.get('image'):

@@ -98,9 +98,11 @@
                                             <img class="img-max mb-2" src="{{ item.image.url }}" alt="image"/>
                                         {% endif %}
                                     </div>
-                                    <div class="col d-flex justify-content-end mb-2">
-                                        <a class="btn btn-secondary btn-md mr-2" href="{% url "new_review_with_ticket" ticket_id=item.id %}">Créer une critique</a>
-                                    </div>
+                                    {% if item.id not in user_reviews__ticket_ids %}
+                                        <div class="col d-flex justify-content-end mb-2">
+                                            <a class="btn btn-secondary btn-md mr-2" href="{% url "new_review_with_ticket" ticket_id=item.id %}">Créer une critique</a>
+                                        </div>
+                                    {% endif %}
                                     <hr class="mt-4"/>
                                 </div>
                             {% endif %}

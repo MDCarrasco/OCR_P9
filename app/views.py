@@ -32,14 +32,22 @@ def index_view(request):
 
 @login_required(login_url='login')
 def feed_view(request):
-    tickets = list(Ticket.objects.all())
-    reviews = list(Review.objects.all())
+    followed_users = list(UserFollows.objects.filter(user_id=request.user.id))
+    followed_users__ids = [followed_user.followed_user_id for followed_user in followed_users]
+    feed_ids = followed_users__ids + [request.user.id]
+    tickets = list(Ticket.objects.filter(user_id__in=feed_ids))
+    reviews = list(Review.objects.filter(user_id__in=feed_ids))
+    user_reviews = list(Review.objects.filter(user_id=request.user.id))
+    user_reviews__ticket_ids = [user_review.ticket_id for user_review in user_reviews]
     tickets_and_reviews = sorted(
         tickets + reviews,
         key=lambda item: item.time_created,
         reverse=True
     )
-    context = {"tickets_and_reviews": tickets_and_reviews}
+    context = {
+        "tickets_and_reviews": tickets_and_reviews,
+        "user_reviews__ticket_ids": user_reviews__ticket_ids
+    }
     return render(request, 'feed.html', context)
 
 
