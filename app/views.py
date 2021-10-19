@@ -33,12 +33,16 @@ def index_view(request):
 @login_required(login_url='login')
 def feed_view(request):
     followed_users = list(UserFollows.objects.filter(user_id=request.user.id))
-    followed_users__ids = [followed_user.followed_user_id for followed_user in followed_users]
+    followed_users__ids = [
+        followed_user.followed_user_id for followed_user in followed_users
+    ]
     feed_ids = followed_users__ids + [request.user.id]
     tickets = list(Ticket.objects.filter(user_id__in=feed_ids))
     reviews = list(Review.objects.filter(user_id__in=feed_ids))
     user_reviews = list(Review.objects.filter(user_id=request.user.id))
-    user_reviews__ticket_ids = [user_review.ticket_id for user_review in user_reviews]
+    user_reviews__ticket_ids = [
+        user_review.ticket_id for user_review in user_reviews
+    ]
     tickets_and_reviews = sorted(
         tickets + reviews,
         key=lambda item: item.time_created,
@@ -76,7 +80,9 @@ def account_follow_view(request):
     url_parameter = request.GET.get("q")
 
     if url_parameter:
-        users = user.objects.filter(username__icontains=url_parameter).exclude(id=request.user.id)
+        users = user.objects.filter(
+            username__icontains=url_parameter
+        ).exclude(id=request.user.id)
     else:
         users = user.objects.all().exclude(id=request.user.id)
 
@@ -196,12 +202,12 @@ class NewReviewWithoutTicket(TemplateView):
 
     def form_save(self, form, review_request=None) -> Optional[Ticket]:
         """
-        This function returns a ticket (review_request) when it's called to
-        save a ticket.
+        This function returns a ticket (review_request) when it's
+        called to save a ticket.
         This allows the form to be aware of it.
-        Then, when the function is called to save a review, it sets the review's
-        ticket member so that the "ticket_id" review foreign key field can be
-        assigned later on by the model's constructor.
+        Then, when the function is called to save a review, it sets the
+        review's ticket member so that the "ticket_id" review foreign key
+        field can be assigned later on by the model's constructor.
         """
         form.instance.user = self.request.user
         if review_request:
@@ -225,7 +231,9 @@ class NewReviewWithTicket(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["ticket"] = Ticket.objects.get(pk=self.kwargs["ticket_id"])
+        context["ticket"] = Ticket.objects.get(
+            pk=self.kwargs["ticket_id"]
+        )
         print(context["ticket"].image.url)
         return context
 

@@ -21,7 +21,10 @@ class NewReviewForm(ModelForm):
     )
     headline = models.CharField(max_length=128)
     body = models.CharField(max_length=8192, blank=True)
-    user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
     time_created = models.DateTimeField(auto_now_add=True)
     """
 
@@ -44,7 +47,10 @@ class NewReviewRequestForm(ModelForm):
     """
     title = models.CharField(max_length=128)
     description = models.TextField(max_length=2048, blank=True)
-    user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
     image = models.ImageField(null=True, blank=True)
     time_created = models.DateTimeField(auto_now_add=True)
     """
@@ -56,14 +62,19 @@ class NewReviewRequestForm(ModelForm):
     def __init__(self, *args, **kwargs):
         path = os.path.join(settings.MEDIA_ROOT, 'images/default.jpeg')
         default_file = open(path, 'rb')
-        self.default_django_file = File(default_file, name=("default.jpeg"))
+        self.default_django_file = File(
+            default_file,
+            name="default.jpeg"
+        )
 
         super(ModelForm, self).__init__(*args, **kwargs)
         self.fields['title'].label = 'Titre'
         self.fields['title'].required = True
         self.fields['description'].required = True
         self.fields['image'].initial = self.default_django_file
-        self.fields['image'].initial.url = default_storage.url('images/default.jpeg')
+        self.fields['image'].initial.url = default_storage.url(
+            'images/default.jpeg'
+        )
 
     def save(self, commit=True):
         if not self.instance.image or not self.cleaned_data.get('image'):
@@ -87,7 +98,9 @@ class UserCreateForm(UserCreationForm):
     '''
     def clean_email(self):
         if User.objects.filter(email=self.cleaned_data['email']).exists():
-            raise forms.ValidationError("Cet e-mail est déjà utilisé par un autre utilisateur.")
+            raise forms.ValidationError(
+                "Cet e-mail est déjà utilisé par un autre utilisateur."
+            )
         return self.cleaned_data['email']
     '''
 
