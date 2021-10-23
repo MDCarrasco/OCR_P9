@@ -8,7 +8,9 @@
 __pycache__
 db.sqlite3
 media/*
-!media/default.jpeg
+!media/images
+media/images/*
+!media/images/default.jpeg
 
 # Backup files # 
 *.bak 
