@@ -61,7 +61,7 @@
                                         </div>
                                     </div>
                                     <div class="col d-flex justify-content-end mb-2">
-                                        <a class="btn btn-secondary btn-md mr-2" href="{% url "edit_review" pk=item.id %}">Modifier</a>
+                                        <a class="btn btn-secondary btn-md mr-2" href="{% url "edit_review" pk=item.id ticket_id=item.ticket.id %}">Modifier</a>
                                         <a class="btn btn-secondary btn-md" href="{% url "delete_review" pk=item.id %}">Supprimer</a>
                                     </div>
                                     <hr class="mt-4"/>

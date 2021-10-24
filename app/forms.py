@@ -7,6 +7,7 @@ from django.core.files import File
 from django.core.files.storage import default_storage
 from django.forms import ModelForm
 from django.forms import IntegerField
+from django.utils.translation import gettext_lazy as _
 from django_starfield import Stars
 
 from app.models import Ticket
@@ -87,13 +88,25 @@ class NewReviewRequestForm(ModelForm):
 
 class UserCreateForm(UserCreationForm):
     class Meta:
-        fields = ('username', 'email', 'password1', 'password2')
         model = User
+        fields = ('username', 'email', 'password1', 'password2')
+        error_messages = {
+            'username': {
+                'blank': _("Veuillez renseigner un nom d'utilisateur."),
+                'max_length': _("Ce nom d'utilisateur est trop long."),
+            },
+        }
 
     def __init__(self, *args, **kwargs):
         super(UserCreateForm, self).__init__(*args, **kwargs)
+        self.fields['username'].label = "Nom d'utilisateur (pseudonyme)"
+        self.fields['username'].required = True
         self.fields['email'].label = "Adresse e-mail"
         self.fields['email'].required = True
+        self.fields['password1'].label = "Mot de passe"
+        self.fields['password1'].required = True
+        self.fields['password2'].label = "Confirmation du mot de passe"
+        self.fields['password2'].required = True
 
     '''
     def clean_email(self):
@@ -109,7 +122,18 @@ class UserLoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = '__all__'
+        error_messages = {
+            'username': {
+                'blank': _("Veuillez renseigner un nom d'utilisateur."),
+                'max_length': _("Ce nom d'utilisateur est trop long."),
+            },
+            'password': {
+                'blank': _("Veuillez renseigner un mot de passe."),
+                'max_length': _("Ce mot de passe est trop long."),
+            },
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['username'].label = "Nom d'utilisateur (pseudonyme)"
+        self.fields['password'].label = "Mot de passe"

@@ -36,7 +36,7 @@ urlpatterns = [
 		name='delete_review_request'
 	),
 	path(
-		'posts/edit_review/<pk>/',
+		'posts/edit_review/<pk>/<int:ticket_id>/',
 		views.UpdateReview.as_view(),
 		name='edit_review'
 	),
@@ -52,7 +52,7 @@ urlpatterns = [
 		name='follow'
 	),
 	path(
-		'account_follow/unfollow/<int:user_id>',
+		'account_follow/unfollow/<int:followed_user_id>',
 		views.unfollow,
 		name='unfollow'
 	),

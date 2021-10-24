@@ -76,15 +76,19 @@ def account_follow_view(request):
         followed_by__in=UserFollows.objects.filter(
             user_id=request.user.id
         )
-    ))
+    ).exclude(is_superuser=True))
     url_parameter = request.GET.get("q")
 
     if url_parameter:
         users = user.objects.filter(
             username__icontains=url_parameter
-        ).exclude(id=request.user.id)
+        ).exclude(id=request.user.id).exclude(is_superuser=True)
     else:
-        users = user.objects.all().exclude(id=request.user.id)
+        users = (
+            user.objects.all()
+            .exclude(id=request.user.id)
+            .exclude(is_superuser=True)
+        )
 
     context["users"] = users
     # context["serzd_users"] = serializer.serialize("json", users)
@@ -120,8 +124,11 @@ def follow(request, user_id):
 
 @login_required(login_url='login')
 @csrf_exempt
-def unfollow(request, user_id):
-    UserFollows.objects.get(followed_user_id=user_id).delete()
+def unfollow(request, followed_user_id):
+    UserFollows.objects.get(
+        user_id=request.user.id,
+        followed_user_id=followed_user_id
+    ).delete()
 
     return account_follow_view(request)
 
@@ -234,7 +241,6 @@ class NewReviewWithTicket(LoginRequiredMixin, CreateView):
         context["ticket"] = Ticket.objects.get(
             pk=self.kwargs["ticket_id"]
         )
-        print(context["ticket"].image.url)
         return context
 
     def form_valid(self, form):
@@ -254,6 +260,13 @@ class UpdateReview(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('posts')
     template_name = 'edit_review.html'
     model = Review
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["ticket"] = Ticket.objects.get(
+            pk=self.kwargs["ticket_id"]
+        )
+        return context
 
     def form_valid(self, form):
         form.instance.user = self.request.user

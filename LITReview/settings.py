@@ -133,3 +133,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # Media (images etc...)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Fixtures
+FIXTURE_DIRS = (
+   os.path.join(BASE_DIR, 'fixtures'),
+)
