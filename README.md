@@ -11,5 +11,8 @@ $ pip install -r ./requirements.txt
 
 $ python manage.py makemigrations
 $ python manage.py migrate
+
+$ python manage.py flush # (if necessary)
+$ python3 manage.py loaddata fixtures/*
 $ python manage.py runserver
 ```
