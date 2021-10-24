@@ -7,12 +7,12 @@ Setup project environment with [venv](https://docs.python.org/fr/3/library/venv.
 ```bash
 $ python3 -m venv env
 $ source ./env/bin/activate
-$ pip install -r ./requirements.txt
+$ pip3 install -r ./requirements.txt
 
-$ python manage.py makemigrations
-$ python manage.py migrate
+$ python3 manage.py makemigrations
+$ python3 manage.py migrate
 
-$ python manage.py flush # (if necessary)
+$ python3 manage.py flush # (if necessary)
 $ python3 manage.py loaddata fixtures/*
-$ python manage.py runserver
+$ python3 manage.py runserver
 ```
