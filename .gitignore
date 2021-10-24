@@ -10,7 +10,11 @@ db.sqlite3
 media/*
 !media/images
 media/images/*
+!media/images/a-general-history-of-the-pyrates-amazon_94vQ5mT.jpeg
 !media/images/default.jpeg
+!media/images/jiu-jitsu-amazon.jpeg
+!media/images/lart-de-la-guerre-nature-et-decouverte_1SHVciQ.jpg
+!media/images/les-conflits-dans-le-monde-google.jpeg
 
 # Backup files # 
 *.bak 
